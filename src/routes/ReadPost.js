@@ -9,19 +9,19 @@ const ReadPost = () => {
   const { postId } = useParams()
   const [post, setPost] = useState({})
 
-  useEffect(() => {
-    const getPost = async () => {
-      try {
-        const response = await blogFetch.get(`/posts/${postId}`)
-
-        setPost(response.data)
-        
-      } catch (error) {
-        console.log(error)
-      }
+    const getPost = async (postId) => {
+        try {
+            const response = await blogFetch.get(`/posts/${postId}`)
+            const data = response.data
+            setPost(data)
+        } catch (error) {
+            console.log(error)
+        }
     }
-    getPost()
-  }, [postId])
+
+    useEffect(() => {
+        getPost(postId)
+    }, [postId])
 
   return (
     <div className='home'>
